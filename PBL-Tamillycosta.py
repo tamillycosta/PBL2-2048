@@ -1,5 +1,6 @@
-
-matrix = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
+matrix = [[2,4, 2, 4], [2, 4, 2, 4], [2, 4, 2, 4], [2, 4, 0, 0]]
+posicao = 0
+historico_pontos=[]
 pontos = 0
 jogadas_validas = 0
 jogo= True
@@ -251,6 +252,7 @@ def derrota(tabuleiro):
             lista.append(tabuleiro[i][j])
     if 0 not in lista:
         print(FONT.renderText("VOCE PERDEU \n 00 ( "))
+        print('Histórico da partida')
         print(Fore.LIGHTWHITE_EX + 20 * '-', 'SCORE', '-' * 30)
         print(pontos)
         print(20 * '-', 'JOGADAS VALIDAS', '-' * 20)
@@ -264,9 +266,6 @@ def derrota(tabuleiro):
 fonte = 'big'
 FONT = pyfiglet.Figlet(font=fonte)
 print('''
-
-
-
 ''')
 print(FONT.renderText("BEM  VINDO  \nAO  2048 ! !"))
 gerar_numero()
@@ -300,22 +299,19 @@ while True:
 
             if perdeu == True:
                 novamente = input(Fore.RED+'Deseja recomçar? responda com [s/n]')
-                try:
-                    if novamente =="s":
-                        jogadas_validas = 0
-                        for i in range(4):
-                            for j in range(4):
-                                   matrix[i][j] = 0
-                                   perdeu = False
-                        gerar_numero()
-                        gerar_numero()
-                    else:
-                        if novamente =="n":
-                            print(Fore.LIGHTBLUE_EX + 'fim de jogo!')
-                            break
-                except:
-                    print('insira uma resposta valida!')
+                if novamente =="s":
+                    jogadas_validas = 0
+                    for i in range(4):
+                        for j in range(4):
+                               matrix[i][j] = 0
+                               perdeu = False
+                    gerar_numero()
+                    gerar_numero()
+                    historico_pontos.append(pontos)
 
-
+                if novamente =="n":
+                    print(Fore.LIGHTBLUE_EX + 'fim de jogo!')
+                    jogo = False
+                    break
 
 
